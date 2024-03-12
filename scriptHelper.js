@@ -4,26 +4,31 @@ require('cross-fetch/polyfill');
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
     // Here is the HTML formatting for our mission target div.
-    /*
+    const missionTarget = document.getElementById("missionTarget");
+        missionTarget.innerHTML= `
+        
+        
                  <h2>Mission Destination</h2>
                  <ol>
-                     <li>Name: </li>
-                     <li>Diameter: </li>
+                     <li>Name: ${name} </li>
+                     <li>Diameter: ${diameter} </li>
                      <li>Star: ${star}</li>
-                     <li>Distance from Earth: </li>
-                     <li>Number of Moons: </li>
+                     <li>Distance from Earth: ${distance} </li>
+                     <li>Number of Moons: ${moons} </li>
                  </ol>
-                 <img src="">
-    */
+                 <img src="${imageUrl}">
+   
+
+        `;
  }
  
  function validateInput(testInput) {
         if(testInput ===""){
             return "Empty";
         } else if(isNaN(testInput)){
-            return "Not a number";
+            return "Not a Number";
         } else{
-            return "Is a number";
+            return "Is a Number";
         }
 
  }
@@ -41,13 +46,35 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
             return false;
         }
     
-    if(fuelLevelValidation === "Not a number" ||cargoLevelValidation === "Not a number"){
+    if(fuelLevelValidation === "Not a number" ||cargoLevelValidation === "Not a Number"){
         alert("Fuel level and cargo mass must be numbers!");
             return false;
     }
+    //update html with pilot and copilot
+    document.getElementById("pilotStatus").innerText = `Pilot ${pilot} is ready for launch `;
+    document.getElementById("copilotStatus").innerText = `Co-pilot ${copilot} is ready for launch `;
 
+    if(fuelLevel < 10000){
+        
+        document.getElementById("fuelStatus").innerText =  "There is not enough fuel for the journey";
+        document.getElementById("faultyItems").style.visibility = "visible";
+        document.getElementById("launchStatus").textContent = "Shuttle Not Ready for Launch";
+        document.getElementById("launchStatus").style.color = "red";
+        
+    }
 
+    if(cargoLevel > 10000){
+        document.getElementById("cargoStatus").innerText =  "There is too much mass for the shuttle to take off. ";
+        document.getElementById("faultyItems").style.visibility = "visible";
+        document.getElementById("launchStatus").textContent = "Shuttle Not Ready for Launch";
+        document.getElementById("launchStatus").style.color = "red";
+        return false;
+    }
 
+    //if everything is correct
+    document.getElementById("launchStatus").innerText = "Shuttle is Ready for Launch";
+    document.getElementById("launchStatus").style.color = "green";
+    return true;
  }
  
  async function myFetch() {
@@ -60,6 +87,9 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  }
  
  function pickPlanet(planets) {
+
+    const randomIndex = Math.floor(Math.random()*planets.length);
+    return planets[randomIndex];
  }
  
  module.exports.addDestinationInfo = addDestinationInfo;
