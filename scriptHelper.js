@@ -1,6 +1,6 @@
 // Write your helper functions here!
 
-require('cross-fetch/polyfill');
+// require('cross-fetch/polyfill');
 
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
     // Here is the HTML formatting for our mission target div.
@@ -43,21 +43,26 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     if(pilotValidation === "Empty" || copilotValidation === "Empty" ||
         fuelLevelValidation === "Empty" ||cargoLevelValidation === "Empty"){
             alert("All fields are required!");
-            return false;
+           // return false;
         }
     
     if(fuelLevelValidation === "Not a number" ||cargoLevelValidation === "Not a Number"){
         alert("Fuel level and cargo mass must be numbers!");
-            return false;
+            //return false;
     }
     //update html with pilot and copilot
-    document.getElementById("pilotStatus").innerText= `Pilot ${pilot} is ready for launch `;
+    
     document.getElementById("copilotStatus").innerText= `Co-pilot ${copilot} is ready for launch `;
+    let pilotStatus = document.getElementById("pilotStatus")
+    
+    pilotStatus.innerText= `Pilot ${pilot} is ready for launch `;
 
     if(fuelLevel < 10000){
         document.getElementById("faultyItems").style.visibility = "visible";
         
         document.getElementById("fuelStatus").innerText =  "There is not enough fuel for the journey";        
+        
+        
         document.getElementById("launchStatus").textContent = "Shuttle Not Ready for Launch";
         document.getElementById("launchStatus").style.visibility = "visible";
         document.getElementById("launchStatus").style.color = "red";
@@ -82,7 +87,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
  
  async function myFetch() {
      let planetsReturned;
- 
+ //add url
      planetsReturned = await fetch().then( function(response) {
          });
  
