@@ -31,57 +31,51 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
 
  }
  
- function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
+ function formSubmission(document, listedPlanets, pilot, copilot, fuelLevel, cargoLevel) {
     // takes in these parameters and updates shuttle requirements
-        let pilotValidation = validateInput(pilot);
-        let copilotValidation = validateInput(copilot);
-        let fuelLevelValidation = validateInput(fuelLevel);
-        let cargoLevelValidation = validateInput(cargoLevel); 
+    let pilotValidation = validateInput(pilot);
+    let copilotValidation = validateInput(copilot);
+    let fuelLevelValidation = validateInput(fuelLevel);
+    let cargoLevelValidation = validateInput(cargoLevel); 
 
     if(pilotValidation === "Empty" || copilotValidation === "Empty" ||
-        fuelLevelValidation === "Empty" ||cargoLevelValidation === "Empty"){
-            alert("All fields are required!");
-        }
+        fuelLevelValidation === "Empty" || cargoLevelValidation === "Empty") {
+        alert("All fields are required!");
+    }
     
-    if(fuelLevelValidation === "Not a number" ||cargoLevelValidation === "Not a Number"){
+    if(fuelLevelValidation === "Not a number" || cargoLevelValidation === "Not a Number") {
         alert("Fuel level and cargo mass must be numbers!");
     }
-    //update html with pilot and copilot
-        let copilotStatus =  document.getElementById("copilotStatus");
-        copilot.innerText= `Co-pilot ${copilot} is ready for launch `;
 
-        let pilotStatus = document.getElementById("pilotStatus");
-        pilotStatus.innerText= `Pilot ${pilot} is ready for launch `;
+    // Update html with pilot and copilot
+    let pilotStatus = document.getElementById("pilotStatus");
+    pilotStatus.innerText = `Pilot ${pilot} is ready for launch`;
 
-    if(fuelLevel < 10000){
-        let ready = true;
-        if(ready === true){
-            document.getElementById("faultyItems").style.visibility = "visible";        
-            document.getElementById("fuelStatus").innerText =  "There is not enough fuel for the journey";            
-            document.getElementById("launchStatus").textContent = "Shuttle Not Ready for Launch";
-            document.getElementById("launchStatus").style.visibility = "visible";
-            document.getElementById("launchStatus").style.color = "red";
+    let copilotStatus = document.getElementById("copilotStatus");
+    copilotStatus.innerText = `Co-pilot ${copilot} is ready for launch`;
 
-        }
-              
+    if(fuelLevel < 10000) {
+        document.getElementById("faultyItems").style.visibility = "visible";        
+        document.getElementById("fuelStatus").innerText =  "There is not enough fuel for the journey";            
+        document.getElementById("launchStatus").textContent = "Shuttle Not Ready for Launch";
+        document.getElementById("launchStatus").style.visibility = "visible";
+        document.getElementById("launchStatus").style.color = "red";
+        return;        
+    } 
+    else if(cargoLevel > 10000) {
+        document.getElementById("faultyItems").style.visibility = "visible";
+        document.getElementById("cargoStatus").innerText =  "There is too much mass for the shuttle to take off. ";        
+        document.getElementById("launchStatus").textContent = "Shuttle Not Ready for Launch";
+        document.getElementById("launchStatus").style.color = "red";
+        return;
+    } 
+    else {
+        // If everything is correct
+        document.getElementById("launchStatus").innerText = "Shuttle is Ready for Launch";    
+        document.getElementById("launchStatus").style.color = "green";
     }
+}
 
-    if(cargoLevel > 10000){
-        let ready = true;
-        if(ready === true){
-            document.getElementById("faultyItems").style.visibility = "visible";
-            document.getElementById("cargoStatus").innerText =  "There is too much mass for the shuttle to take off. ";        
-            document.getElementById("launchStatus").textContent = "Shuttle Not Ready for Launch";
-            document.getElementById("launchStatus").style.color = "red";
-        }        
-        
-    }
-
-    //if everything is correct
-    document.getElementById("launchStatus").innerText = "Shuttle is Ready for Launch";    
-    document.getElementById("launchStatus").style.color = "green";
-    
- }
  
  async function myFetch() {
      let planetsReturned;
