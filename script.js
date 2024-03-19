@@ -22,13 +22,13 @@ window.addEventListener("load", function() {
 
         const form = document.querySelector("form[data-testid='testForm']");
         form.addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent default form submission
+            event.preventDefault(); 
 
-            let pilot = form.querySelector('input[id= "pilotName"]').value;    //document.getElementById("pilotName").value;
+            let pilot = form.querySelector('input[id= "pilotName"]').value;   
             let copilot = form.querySelector('input[name="copilotName"]').value;
             let fuelLevel =  form.querySelector('input[name="fuelLevel"]').value;   
-            let cargoLevel =  form.querySelector('input[name="cargoMass"]').value;       
-
+            let cargoLevel =  form.querySelector('input[name="cargoMass"]').value;    
+            
             formSubmission(document, listedPlanets, pilot, copilot, fuelLevel, cargoLevel);
         });
 

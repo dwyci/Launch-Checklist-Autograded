@@ -50,28 +50,21 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     }
 
     // Update html with pilot and copilot
+ 
+        let pilotStatus = document.getElementById("pilotStatus");  
+        pilotStatus.innerText = `Pilot ${pilot} is ready for launch`;
+            
+        let copilotStatus = document.getElementById("copilotStatus");
+        copilotStatus.innerText = `Co-pilot ${copilot} is ready for launch`;
 
-    let pilotStatus = document.querySelector("#pilotStatus[data-testid='pilotStatus']");
-    pilotStatus.innerText = `Pilot ${pilot} is ready for launch`;
-
-    //let pilotStatus = document.getElementById("pilotStatus");
-    //pilotStatus.innerText = `Pilot ${pilot} is ready for launch`;
-        
-    let copilotStatus = document.getElementById("copilotStatus");
-    copilotStatus.innerText = `Co-pilot ${copilot} is ready for launch`;
-
-    if(fuelLevel < 10000) {
+        if(fuelLevel < 10000) {
         document.getElementById("faultyItems").style.visibility = "visible";        
-        //document.getElementByID("fuelStatus").innerText =  "There is not enough fuel for the journey";            
-        // Select the <li> element with the ID "fuelStatus"
-                let fuelStatusElement = document.getElementById("fuelStatus");
-
-                // Update its text content
-                fuelStatusElement.textContent = "There is not enough fuel for the journey";
+          let fuelStatusElement = document.getElementById("fuelStatus");
+         fuelStatusElement.textContent = "There is not enough fuel for the journey";
 
         document.getElementById("launchStatus").textContent = "Shuttle Not Ready for Launch";
         document.getElementById("launchStatus").style.visibility = "visible";
-        document.getElementById("launchStatus").style.color = "red";       
+        document.getElementById("launchStatus").style.color = "red";              
 
         return;        
     } 
@@ -79,15 +72,15 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
         document.getElementById("faultyItems").style.visibility = "visible";
         document.getElementById("cargoStatus").innerText =  "There is too much mass for the shuttle to take off. ";        
         document.getElementById("launchStatus").textContent = "Shuttle Not Ready for Launch";
-        document.getElementById("launchStatus").style.color = "red";
+        document.getElementById("launchStatus").style.color = "red";         
 
-            
         return;
     } 
     else {
         // If everything is correct
-        // document.getElementById("launchStatus").innerText = "Shuttle is Ready for Launch";    
+        document.getElementById("launchStatus").innerText = "Shuttle is Ready for Launch";    
          document.getElementById("launchStatus").style.color = "green";
+        return;
     }
 }
 
