@@ -54,8 +54,6 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     let pilotStatus = document.querySelector("#pilotStatus[data-testid='pilotStatus']");
     pilotStatus.innerText = `Pilot ${pilot} is ready for launch`;
 
-    console.log(pilotStatus);
-
     //let pilotStatus = document.getElementById("pilotStatus");
     //pilotStatus.innerText = `Pilot ${pilot} is ready for launch`;
         
