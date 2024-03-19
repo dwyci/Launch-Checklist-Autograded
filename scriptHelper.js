@@ -2,6 +2,8 @@
 
 // require('cross-fetch/polyfill');
 
+
+
 function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
     // Here is the HTML formatting for our mission target div.
     const missionTarget = document.getElementById("missionTarget");
@@ -31,7 +33,7 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
 
  }
  
- function formSubmission(document, listedPlanets, pilot, copilot, fuelLevel, cargoLevel) {
+ function formSubmission(document, listedPlanets, pilot, copilot, fuelLevel, cargoLevel) {  
     // takes in these parameters and updates shuttle requirements
     let pilotValidation = validateInput(pilot);
     let copilotValidation = validateInput(copilot);
@@ -48,18 +50,31 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     }
 
     // Update html with pilot and copilot
-    let pilotStatus = document.getElementById("pilotStatus");
+
+    let pilotStatus = document.querySelector("#pilotStatus[data-testid='pilotStatus']");
     pilotStatus.innerText = `Pilot ${pilot} is ready for launch`;
 
+    console.log(pilotStatus);
+
+    //let pilotStatus = document.getElementById("pilotStatus");
+    //pilotStatus.innerText = `Pilot ${pilot} is ready for launch`;
+        
     let copilotStatus = document.getElementById("copilotStatus");
     copilotStatus.innerText = `Co-pilot ${copilot} is ready for launch`;
 
     if(fuelLevel < 10000) {
         document.getElementById("faultyItems").style.visibility = "visible";        
-        document.getElementById("fuelStatus").innerText =  "There is not enough fuel for the journey";            
+        //document.getElementByID("fuelStatus").innerText =  "There is not enough fuel for the journey";            
+        // Select the <li> element with the ID "fuelStatus"
+                let fuelStatusElement = document.getElementById("fuelStatus");
+
+                // Update its text content
+                fuelStatusElement.textContent = "There is not enough fuel for the journey";
+
         document.getElementById("launchStatus").textContent = "Shuttle Not Ready for Launch";
         document.getElementById("launchStatus").style.visibility = "visible";
-        document.getElementById("launchStatus").style.color = "red";
+        document.getElementById("launchStatus").style.color = "red";       
+
         return;        
     } 
     else if(cargoLevel > 10000) {
@@ -67,12 +82,14 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
         document.getElementById("cargoStatus").innerText =  "There is too much mass for the shuttle to take off. ";        
         document.getElementById("launchStatus").textContent = "Shuttle Not Ready for Launch";
         document.getElementById("launchStatus").style.color = "red";
+
+            
         return;
     } 
     else {
         // If everything is correct
-        document.getElementById("launchStatus").innerText = "Shuttle is Ready for Launch";    
-        document.getElementById("launchStatus").style.color = "green";
+        // document.getElementById("launchStatus").innerText = "Shuttle is Ready for Launch";    
+         document.getElementById("launchStatus").style.color = "green";
     }
 }
 

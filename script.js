@@ -6,17 +6,7 @@ window.addEventListener("load", function() {
     let listedPlanetsResponse = myFetch().then(function(result) {
         listedPlanets = result;
     }).then(function() {
-        const form = document.querySelector("form[data-testid='testForm']");
-        form.addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent default form submission
-
-            let pilot = document.getElementById("pilotName").value;
-            let copilot = document.getElementById("copilotName").value;
-            let fuelLevel = document.getElementById("fuelLevel").value;
-            let cargoLevel = document.getElementById("cargoMass").value;
-
-            formSubmission(document, listedPlanets, pilot, copilot, fuelLevel, cargoLevel);
-        });
+        
 
         // Pick a random planet and add destination info
         const randomPlanet = pickPlanet(listedPlanets);
@@ -29,5 +19,18 @@ window.addEventListener("load", function() {
             randomPlanet.moons,
             randomPlanet.image
         );
+
+        const form = document.querySelector("form[data-testid='testForm']");
+        form.addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            let pilot = form.querySelector('input[id= "pilotName"]').value;    //document.getElementById("pilotName").value;
+            let copilot = form.querySelector('input[name="copilotName"]').value;
+            let fuelLevel =  form.querySelector('input[name="fuelLevel"]').value;   
+            let cargoLevel =  form.querySelector('input[name="cargoMass"]').value;       
+
+            formSubmission(document, listedPlanets, pilot, copilot, fuelLevel, cargoLevel);
+        });
+
     });
 });
