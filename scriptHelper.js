@@ -40,12 +40,12 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
     let fuelLevelValidation = validateInput(fuelLevel);
     let cargoLevelValidation = validateInput(cargoLevel); 
 
-    if(pilot === "Empty" || copilot === "Empty" ||
-        fuelLevel === "Empty" || cargoLevel === "Empty") {
+    if(pilotValidation === "Empty" || copilotValidation === "Empty" ||
+        fuelLevelValidation === "Empty" || cargoLevelValidation === "Empty") {
         alert("All fields are required!");
     }
     
-    if(fuelLevel === "Not a number" || cargoLevel === "Not a Number") {
+    if(fuelLevelValidation === "Not a number" || cargoLevelValidation === "Not a Number") {
         alert("Fuel level and cargo mass must be numbers!");
     }
 
